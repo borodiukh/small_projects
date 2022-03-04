@@ -1,12 +1,11 @@
 from random import choice
 
-words_list = ["человек", "слово", "лицо", "дверь", "земля", "работа", "ребенок", "история", "женщина", "развитие",
-              "власть", "правительство", "начальник", "спектакль", "автомобиль", "экономика", "литература", "граница",
-              "магазин", "председатель", "сотрудник", "республика", "личность"]
 
-
-def get_word(words):  # get one random word from words_list
-    return choice(words).upper()
+def get_word():  # get one random word from text file
+    with open('words_for_hangman.txt') as file:
+        words_list = file.readlines()
+        word = choice(words_list).upper().strip()
+    return word
 
 
 def display_hangman(tries):
@@ -84,49 +83,47 @@ def display_hangman(tries):
     return stages[tries]
 
 
-def input_from_user(propos, word):
+def input_from_user(propos, word):  # check user input for a "syntax" mistakes
     while not propos.isalpha() or (len(propos) != len(word) and len(propos) > 1):
         if not propos.isalpha():
-            print('Not a character')
+            print('Only letters')
         if len(propos) != len(word) and len(propos) > 1:
-            print('Ви ввели занадто коротке слово or too long word')
-        propos = input('Введіть букву або слово: ')
+            print('You input too short or too long word')
+        propos = input('Input letter or word: ')
 
 
 def maybe_new_game():
     new_game = input('Do you want to play new game? Input "yes" or "no" ')
     while new_game != 'yes' and new_game != 'no':
         new_game = input('Input "yes" or "no" ')
-
     return new_game
 
 
 def play(word):  # main function, logic of the game
 
-    word_completion = list('_' * len(word))  # array, содержащая символы _ на каждую букву задуманного слова
-    guessed_letters = []  # список уже названных букв
-    guessed_words = []  # список уже названных слов
+    word_completion = list('_' * len(word))  # array (all letters are '_')
+    guessed_letters = []  # letters which was inputed before
+    guessed_words = []  # words which was inputed before
     tries = 6
-    print('Давайте играть в угадайку слов!')
+    print('LETS PLAY THE HANGMAN GAME')
 
     while True:
 
-        print(display_hangman(tries))  # show stan of the game
+        print(display_hangman(tries))  # show state of the game
         print(''.join(word_completion))
-        # print(word)  # SHOULD REMOVE LATER!!!
 
-        propos = input('Введіть букву або слово: ')
-        input_from_user(propos, word)  # check user input(FOR MISTAKES)
+        propos = input('Input letter or word: ')
+        input_from_user(propos, word)  # check user input(FOR SYNTAX MISTAKES)
         propos = propos.upper()
 
         # if user input character or word which WAS BEFORE
         while (propos in guessed_letters) or (propos in guessed_words):
-            print('Ви вводили цю букву або слово раніше')
-            propos = input('Введіть букву або слово: ')
+            print('You input this letter or word before')
+            propos = input('Input letter or word: ')
             input_from_user(propos, word)
             propos = propos.upper()
 
-        # check if the propos == word
+        # check if the propos != word
         if len(propos) == len(word) and propos != word:
             tries -= 1
             guessed_words.append(propos)
@@ -142,7 +139,7 @@ def play(word):  # main function, logic of the game
 
             # if you guessed all letters
             if '_' not in word_completion:
-                print('Поздравляем, вы угадали слово! Вы победили!')
+                print('CONGRATULATIONS, YOU WIN')
 
                 # do you want to play new game
                 new_game = maybe_new_game()
@@ -152,10 +149,10 @@ def play(word):  # main function, logic of the game
                     flag = True
                     break
                 elif new_game == 'no':
-                    print('Goodbye')
+                    print('Goodbye, see you')
                     flag = False
                     break
-                    
+
         else:  # if letter not in word
             tries -= 1
             guessed_letters.append(propos)
@@ -164,7 +161,7 @@ def play(word):  # main function, logic of the game
         # if you guess the word or tries ended
         if propos == word or tries == 0:
             if propos == word:
-                print('Поздравляем, вы угадали слово! Вы победили!')
+                print('CONGRATULATIONS, YOU WIN')
             if tries == 0:
                 print('You lose')
                 print(f'The word : {word}')
@@ -176,11 +173,12 @@ def play(word):  # main function, logic of the game
                 flag = True
                 break
             elif new_game == 'no':
-                print('Goodbye')
+                print()
+                print('Goodbye, see you')
                 flag = False
                 break
 
 
 flag = True
 while flag:
-    play(get_word(words_list))
+    play(get_word())
