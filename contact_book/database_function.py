@@ -32,6 +32,10 @@ def main():
                         email_address TEXT);
                         """
 
+    sql_create_country_code = """CREATE TABLE IF NOT EXISTS Country_codes (
+                                 country_name TEXT NOT NULL,
+                                 code INTEGER NOT NULL);"""
+
     # create a database connection
     connection_object = create_connection(database)
 
@@ -39,6 +43,7 @@ def main():
     if connection_object is not None:
         # create user table
         create_table(connection_object, sql_create_user)
+        # create_table(connection_object, sql_create_country_code)
     else:
         print("Error! cannot create the database connection.")
 
