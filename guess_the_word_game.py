@@ -9,7 +9,7 @@ def get_word():  # get one random word from text file
 
 
 def display_hangman(tries):
-    stages = [  # финальное состояние: голова, торс, обе руки, обе ноги
+    stages = [
         '''
                    --------
                    |      |
@@ -19,7 +19,7 @@ def display_hangman(tries):
                    |     / \\
                    -
                 ''',
-        # голова, торс, обе руки, одна нога
+
         '''
                    --------
                    |      |
@@ -29,7 +29,7 @@ def display_hangman(tries):
                    |     / 
                    -
                 ''',
-        # голова, торс, обе руки
+
         '''
                    --------
                    |      |
@@ -39,7 +39,7 @@ def display_hangman(tries):
                    |      
                    -
                 ''',
-        # голова, торс и одна рука
+
         '''
                    --------
                    |      |
@@ -49,7 +49,7 @@ def display_hangman(tries):
                    |     
                    -
                 ''',
-        # голова и торс
+
         '''
                    --------
                    |      |
@@ -59,7 +59,7 @@ def display_hangman(tries):
                    |     
                    -
                 ''',
-        # голова
+
         '''
                    --------
                    |      |
@@ -69,7 +69,7 @@ def display_hangman(tries):
                    |     
                    -
                 ''',
-        # начальное состояние
+
         '''
                    --------
                    |      |
