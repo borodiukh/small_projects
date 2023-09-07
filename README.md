@@ -8,3 +8,4 @@ This repo include:
 3. Guess number game
 4. Hangman
 5. Contact book library
+6. Coffee machine
