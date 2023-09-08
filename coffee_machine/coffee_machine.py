@@ -27,6 +27,7 @@ def check_resources(drink):
 
 
 def process_coins(drink):
+    print(f'{drink} cost ${MENU[drink]["cost"]}'.capitalize())
     print('Please insert coins')
     twenty_five = input('How many quarters (25)?: ')
     ten = input('How many dimes (10)?: ')
