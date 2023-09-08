@@ -3,10 +3,10 @@ class MoneyMachine:
     CURRENCY = "$"
 
     COIN_VALUES = {
-        "quarters": 0.25,
-        "dimes": 0.10,
-        "nickles": 0.05,
-        "pennies": 0.01
+        "quarters (25)": 0.25,
+        "dimes (10)": 0.10,
+        "nickles (5)": 0.05,
+        "pennies (1)": 0.01
     }
 
     def __init__(self):
