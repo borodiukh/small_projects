@@ -9,3 +9,4 @@ This repo include:
 4. Hangman
 5. Contact book library
 6. Coffee machine
+7. Simple quiz(2 different)
