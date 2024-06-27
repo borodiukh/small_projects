@@ -10,3 +10,4 @@ This repo include:
 5. Contact book library
 6. Coffee machine
 7. Simple quiz(2 different)
+8. Text to Morse code
